@@ -11,7 +11,6 @@ class ViewController: UIViewController {
     var SecondNumber: String = ""
     var Operand: String = ""
     var ResultIput: String = ""
-    var alert = ShowAlert.init()
 
     
     @IBOutlet weak var OutNumberLabel: UILabel!
@@ -37,7 +36,6 @@ class ViewController: UIViewController {
         Operand = ""
         ResultIput = ""
         OutNumberLabel.text = "0"
-        alert.showSimpleAlert()
     }
   
     @IBAction func InputOperand(_ sender: Any) {
