@@ -6,91 +6,66 @@
 //
 
 import UIKit
-
 class ViewController: UIViewController {
-    var operand = "";
-    var numberOne = "";
-    var numberTwo = "";
-    
-    @IBOutlet weak var labelValue: UILabel!
-    
-    @IBAction func InputNumber(_ sender: UIButton) {
-        switch numberOne {
-        case "1":
-            numberOne += "1";
-        case "2":
-            numberOne += "2";
-        case "3":
-            numberOne += "3";
-        case "4":
-            numberOne += "4";
-        case "5":
-            numberOne += "5";
-        case "6":
-            numberOne += "6";
-        case "7":
-            numberOne += "7";
-        case "8":
-            numberOne += "8";
-        case "9":
-            numberOne += "9";
-        case "0":
-            numberOne += "0";
-        default:
-            print("err")
-        }
-        if operand.isEmpty{
-            labelValue.text = numberOne + (sender.titleLabel?.text)!
-            labelValue.text = numberOne
-        }else {
-            labelValue.text = numberTwo + (sender.titleLabel?.text)!
-            labelValue.text = numberTwo
+    var FirstNumber: String = ""
+    var SecondNumber: String = ""
+    var Operand: String = ""
+    var ResultIput: String = ""
+    var alert = ShowAlert.init()
 
+    
+    @IBOutlet weak var OutNumberLabel: UILabel!
+    
+    @IBOutlet weak var buttonResult: UIButton!
+    @IBOutlet weak var Inputbutton: UIButton!
+    
+    @IBAction func EventButtonInput(_ sender: UIButton) {
+        if Operand.isEmpty{
+            FirstNumber += (sender.titleLabel?.text)!
+            OutNumberLabel.text = FirstNumber
+            buttonResult.isEnabled = true
+        }else{
+            SecondNumber += (sender.titleLabel?.text)!
+            OutNumberLabel.text = SecondNumber
+            
         }
     }
-    @IBAction func Operand(_ sender: UIButton) {
-        operand = sender.titleLabel?.text as! String
+    
+    @IBAction func ClearNumber(_ sender: Any) {
+        FirstNumber = ""
+        SecondNumber = ""
+        Operand = ""
+        ResultIput = ""
+        OutNumberLabel.text = "0"
+        alert.showSimpleAlert()
     }
-    @IBAction func buttonaction(_ sender: UIButton) {
-        operand = ""
-        numberTwo = ""
-        numberOne = ""
-        labelValue.text = "0"
-       
-    }
-    @IBAction func InputValue(_ sender: UIButton) {
-       
-        if operand.isEmpty{
-            labelValue.text = numberOne + (sender.titleLabel?.text)!
-            labelValue.text = numberOne
-        }else {
-            labelValue.text = numberTwo + (sender.titleLabel?.text)!
-            labelValue.text = numberTwo
-
-        }    }
-    @IBAction func result(_ sender: UIButton) {
-        var resultData = 0.0
-        
-        switch operand {
-        case "+":
-            resultData = Double(numberOne)! + Double(numberTwo)!
-        case "-":
-            resultData = Double(numberOne)! - Double(numberTwo)!
+  
+    @IBAction func InputOperand(_ sender: Any) {
+        var resultDouble = 0.0
+        switch Operand {
         case "*":
-            resultData = Double(numberOne)! * Double(numberTwo)!
+            resultDouble = Double(FirstNumber)! * Double(SecondNumber)!
         case "/":
-            resultData = Double(numberOne)! / Double(numberTwo)!
+            resultDouble = Double(FirstNumber)! / Double(SecondNumber)!
+        case "+":
+            resultDouble = Double(FirstNumber)! + Double(SecondNumber)!
+        case "-":
+            resultDouble = Double(FirstNumber)! - Double(SecondNumber)!
         default:
-            print("non")
+            break
         }
-        if resultData.truncatingRemainder(dividingBy: 1.0) == 0.0{
-            labelValue.text = String(Int(resultData))
-        }
-        else {
-            labelValue.text = String(resultData)
+        if resultDouble.truncatingRemainder(dividingBy: 1.0) == 0.0{
+            OutNumberLabel.text = String(Int(resultDouble))
+        }else {
+            OutNumberLabel.text = String(resultDouble)
 
         }
-        
-    }}
+
+    }
+    @IBAction func Result(_ sender: UIButton) {
+        Operand = (sender.titleLabel?.text)!
+    }
+    
+}
 
 
